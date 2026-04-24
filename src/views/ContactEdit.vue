@@ -11,6 +11,7 @@
 </template>
 <script>
 import ContactForm from "@/components/ContactForm.vue";
+import contactService from "@/services/contact.service";
 import ContactService from "@/services/contact.service";
 export default {
   components: {
@@ -31,7 +32,7 @@ export default {
         this.contact = await ContactService.get(id);
       } catch (error) {
         console.log(error);
-        
+
         this.$router.push({
           name: "notfound",
           params: {
@@ -54,7 +55,7 @@ export default {
     async deleteContact() {
       if (confirm("Bạn muốn xóa Liên hệ này?")) {
         try {
-          await ContactService.delete(this.contact._id);
+          await contactService.delete(this.contact._id);
           this.$router.push({ name: "contactbook" });
         } catch (error) {
           console.log(error);
